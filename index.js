@@ -86,25 +86,25 @@ const questions = [
         type: "list",
         message: "Please select a license",
         name: "license",
-        choice: ["Mozilla", "Apache", "MIT", "Apache License 2.0", "Common Developer 1.0", "No license"]
+        choices: ["Mozilla", "Apache", "MIT", "Common Developer 1.0", "No license"]
     },
 ];
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    try {
-        fs.accessSync(fileName)
-    } catch (error) {
-        fs.writeFileSync(fileName, data, " ");
-    }
+    fs.writeFile(fileName, data, function (err) {
+        if (err) {
+            return console.log(err);
+        }
+        console.log("Success!");
+    });
 };
 
 // TODO: Create a function to initialize app
-async function init() {
+function init() {
     inquirer.prompt(questions).then((inputs) => {
         const data = generateMarkdown(inputs);
-        console.log(inputs)
-        await writeToFile("README.md", data)
+        writeToFile("./CreatedDocs/README.md", data)
     });
 };
 
