@@ -1,16 +1,6 @@
-// TODO: Include packages needed for this application
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown')
-
-// "https://javascript.plainenglish.io/how-to-inquirer-js-c10a4e05ef1f" Inquirer usage
-// https://gist.github.com/Amitabh-K/ae073eea3d5207efaddffde19b1618e8 Inquirer check email
-// https://shields.io/ Shield creator
-// https://opensource.org Licenses
-
-// https://github.com/hoffman1200/Homework-9/tree/master/Develop
-// https://www.youtube.com/watch?v=tshItrUIPYw&ab_channel=KazzuallGamer
-
 const questions = [
     {
         type: "input",
@@ -35,10 +25,9 @@ const questions = [
             valid = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)
 
             if (valid) {
-                console.log("email has been stored")
                 return true
             } else {
-                console.log(". Please enter a valid email")
+                console.log("\033[31mPlease enter a valid email(example@example.com)\033[91m")
                 return false
             }
         }
@@ -96,7 +85,7 @@ function writeToFile(fileName, data) {
         if (err) {
             return console.log(err);
         }
-        console.log("Success!");
+        console.log("\x1b[32mSuccess! Your README.md file has been created inside the 'CreatedDocs' folder\x1b[0m");
     });
 };
 
