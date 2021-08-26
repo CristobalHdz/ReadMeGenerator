@@ -92,18 +92,19 @@ const questions = [
 
 // TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    fs.writeFile(fileName, data, (err) => {
-        err ? console.error(err) : console.log("Your README file has been proppertly created")
-    });
+    try {
+        fs.accessSync(fileName)
+    } catch (error) {
+        fs.writeFileSync(fileName, data, " ");
+    }
 };
 
 // TODO: Create a function to initialize app
-function init() {
+async function init() {
     inquirer.prompt(questions).then((inputs) => {
         const data = generateMarkdown(inputs);
         console.log(inputs)
-
-        writeToFile("README.md", inputs)
+        await writeToFile("README.md", data)
     });
 };
 
